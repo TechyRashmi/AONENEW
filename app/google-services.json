@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1051203374523",
+    "project_id": "aone-enterprises",
+    "storage_bucket": "aone-enterprises.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051203374523:android:3dc283080c8a660619489e",
+        "android_client_info": {
+          "package_name": "com.blucor.aoneenterprises"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051203374523-g8lk6145hfi7glkdg5lashmef8o3abs1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blucor.aoneenterprises",
+            "certificate_hash": "958f70d3f3ff4f5f1b6e4501638c157f44bafa61"
+          }
+        },
+        {
+          "client_id": "1051203374523-94sqqc89saflk03csq10hpop9tu2qjj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMq5Rtx23fp81CBVPmcQvECa2h_XpYYAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051203374523-94sqqc89saflk03csq10hpop9tu2qjj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

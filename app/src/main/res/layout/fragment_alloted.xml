@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="gowardhanfragments.AllotedFragment">
+
+    <LinearLayout
+        android:background="@color/red_800"
+        android:outlineProvider="bounds"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:elevation="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:weightSum="5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp">
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="Product"
+            android:gravity="center"
+            android:layout_weight="1.6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="Size"
+            android:gravity="center|left"
+            android:layout_weight="1.2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="Qty"
+            android:gravity="center|left"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="Used"
+            android:gravity="center|left"
+            android:layout_weight=".6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:text="Left"
+            android:gravity="center"
+            android:layout_weight=".6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_centerVertical="true"
+        android:id="@+id/recyclerView"
+        android:background="@color/white"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        />
+
+
+</LinearLayout>

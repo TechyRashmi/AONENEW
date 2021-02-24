@@ -1,0 +1,27 @@
+package network
+
+object EndPoints {
+    private val URL_ROOT = "https://aone4u.net/API/"
+    val IMAGE_PATH = "https://aone4u.net/Gowardhan/upload/"
+    val URL_LOGIN = URL_ROOT + "Login.php"
+    val URL_GETPRODUCTS = URL_ROOT + "getAllotedProducts.php"
+    val URL_GETSIZE = URL_ROOT + "getSize.php"
+    val URL_ADDCART = URL_ROOT + "add_to_cart.php"
+    val URL_GETCART = URL_ROOT + "get_product.php"
+    val URL_UPDATECART = URL_ROOT + "update_prod_qty.php"
+    val URL_ALLOTEDPRODUCT = URL_ROOT + "get_alloted_product.php"
+    val URL_SEARCH = URL_ROOT + "search_shop.php"
+    val URL_GETSHOPDETAILS = URL_ROOT + "search_shops.php"
+    val URL_ADDSHOP = URL_ROOT + "add_shop.php"
+    val URL_DELETECART = URL_ROOT + "delete_product.php"
+    val URL_PLACEORDER = URL_ROOT + "order_place.php"
+    val URL_RETURN = URL_ROOT + "return_product.php"
+    val URL_GETORDER = URL_ROOT + "my_order.php"
+    val URL_GETSHEDULEDORDER = URL_ROOT + "fetch_all_schedules.php"
+    val URL_GETCUSTOMER = URL_ROOT + "my_customer.php"
+    val URL_SCHEDULECHECKOUT = URL_ROOT + "shedule_checkout.php"
+    val URL_GETSHOPS = URL_ROOT + "get_shop_orders.php"
+    val URL_GETPDF = URL_ROOT + "send_pdf.php"
+    val URL_GETEXECUTIVE = URL_ROOT + "get_executive.php"
+    val URL_GETLOCATION = URL_ROOT + "get_location.php"
+}

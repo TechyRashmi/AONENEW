@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/alloted"
+            android:icon="@drawable/ic_inventory"
+            android:title="My Alloted Items" />
+        <item
+            android:id="@+id/scedule"
+            android:icon="@drawable/ic_calendar__1_"
+            android:title="Scheduled Order" />
+        <item
+            android:id="@+id/cart"
+            android:icon="@drawable/ic_clock"
+            android:title="Pending Order List" />
+        <item
+            android:id="@+id/order"
+            android:icon="@drawable/ic_checklist"
+            android:title="My orders" />
+        <item
+            android:id="@+id/customer"
+            android:icon="@drawable/ic_customer"
+            android:title="My Customers" />
+        <item
+            android:id="@+id/Return"
+            android:icon="@drawable/ic_returning"
+            android:title="Returns" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
+    </group>
+</menu>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:elevation="@dimen/_15sdp"
+        android:layout_margin="@dimen/_3sdp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_65sdp">
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/tvNo"
+                android:textColor="@color/black"
+                android:text=" 1. "
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/tvTime"
+                android:textColor="@color/red_800"
+                android:text="10:43PM"
+                android:textSize="@dimen/_13sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:gravity="left"
+                android:maxLines="3"
+             android:id="@+id/tvAddress"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/grey_900"
+                android:text="Suratwala Mark Plazzo, Hinjawadi Village, Hinjawadi, Pune, Maharashtra 411057 "
+                android:textSize="@dimen/_12sdp"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="wrap_content"/>
+
+
+            <ImageView
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:src="@drawable/ic_baseline_location_on_24"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"/>
+
+        </LinearLayout>
+
+     <View
+         android:background="@color/grey_200"
+         android:layout_marginTop="@dimen/_8sdp"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_1sdp"/>
+    </LinearLayout>
+</LinearLayout>

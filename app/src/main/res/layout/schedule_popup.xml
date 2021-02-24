@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvDate"
+            android:padding="10dp"
+            android:layout_gravity="left"
+            android:textColor="@color/red_800"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginRight="2dp"
+            app:srcCompat="@drawable/ic_baseline_cancel_24"
+            tools:ignore="VectorDrawableCompat" />
+    </RelativeLayout>
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/grey_700"
+        android:background="@drawable/shape"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp">
+
+        <EditText
+            android:id="@+id/etAdvance"
+            android:textSize="@dimen/_12sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textColorHint="@color/black"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:hint=" Enter Advance Amount"
+            android:background="@null"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:backgroundTint="@color/grey_700"
+        android:background="@drawable/shape"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp">
+
+        <EditText
+
+            android:editable="false"
+            android:textSize="@dimen/_12sdp"
+            android:id="@+id/etRemaining"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textColorHint="@color/black"
+            android:padding="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:hint=" Remaining Amount"
+            android:background="@null"
+            android:inputType="number"
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvSubmit"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="Submit"
+        android:background="@color/red_800"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"/>
+
+
+
+
+
+</LinearLayout>

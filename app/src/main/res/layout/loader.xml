@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#99000000"
+    android:gravity="center">
+
+
+
+    <com.bitvale.lightprogress.LightProgress
+        android:id="@+id/light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_30sdp"
+        android:textColor="@color/text_color"
+        android:text="Loading.."
+        app:light_color="@color/light_color"/>
+
+
+
+
+
+
+
+</LinearLayout>
