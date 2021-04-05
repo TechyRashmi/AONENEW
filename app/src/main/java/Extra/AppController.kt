@@ -1,11 +1,15 @@
 package Extra
 
+import LocationTrackingService
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import android.location.LocationManager
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import androidx.fragment.app.Fragment
+import com.blucor.aoneenterprises.main.MainActivity
 
 
 import com.vendorsapp.activities.auth.AuthRepo
@@ -48,6 +52,11 @@ class AppController : Application(), KodeinAware {
         super.onCreate()
 
        prefHelper = Preferences(this)
+
+
+
+
+
    //   loader = CustomLoader(this, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
 
 
@@ -66,6 +75,16 @@ class AppController : Application(), KodeinAware {
     companion object {
         const val base_url = "https://example.i-tech.consulting"
         lateinit var prefHelper: Preferences
+
+
+        private const val PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 100
+
+
+        private lateinit var ctx: Context
+        private var instance: MainActivity? = null
+
+        // inside a basic activity
+        private var locationManager: LocationManager? = null
 
 
       //  lateinit var loader: CustomLoader

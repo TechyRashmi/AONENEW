@@ -12,7 +12,7 @@
         <item
             android:id="@+id/scedule"
             android:icon="@drawable/ic_calendar__1_"
-            android:title="Scheduled Order" />
+            android:title="Credit Order" />
         <item
             android:id="@+id/cart"
             android:icon="@drawable/ic_clock"
@@ -26,6 +26,7 @@
             android:icon="@drawable/ic_customer"
             android:title="My Customers" />
         <item
+            android:visible="false"
             android:id="@+id/Return"
             android:icon="@drawable/ic_returning"
             android:title="Returns" />

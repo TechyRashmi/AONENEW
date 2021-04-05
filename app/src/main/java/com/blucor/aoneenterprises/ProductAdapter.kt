@@ -77,7 +77,6 @@ class ProductAdapter : RecyclerView.Adapter<Holder> {
         )
     }
     override fun onBindViewHolder(holder: Holder, position: Int) {
-
         holder.tvProductName.text=data.get(position).prod_name
         val url=EndPoints.IMAGE_PATH+data.get(position).prod_image
         Glide.with(holder.itemView)  //2
@@ -98,21 +97,20 @@ class ProductAdapter : RecyclerView.Adapter<Holder> {
 
         }
     }
-
     override fun getItemCount(): Int {
         return data.size
     }
-
     override fun getItemViewType(position: Int): Int {
         return position
     }
 }
+
+
 class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var llMain: LinearLayout
     var rlAddtocart: RelativeLayout
     var image: ImageView
     var tvProductName: TextView
-
 
     init {
         image = itemView.findViewById(R.id.image)
@@ -121,7 +119,6 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         rlAddtocart = itemView.findViewById(R.id.rlAddtocart)
     }
 }
-
 
 fun showdialog(ctx: Context, size: String, name: String, url: String, product_id: String)
 {
@@ -142,14 +139,14 @@ fun showdialog(ctx: Context, size: String, name: String, url: String, product_id
        model=Model()
 
         val used:Int =jsonobject.getString("used_qty").toInt()
-        val total_qty:Int =jsonobject.getString("qty").toInt()
+        val total_qty:Int =jsonobject.getString("total_qty").toInt()
 
 
         if(used<total_qty)
         {
             model.size=jsonobject.getString("size")
             model.size_id=jsonobject.getString("size_id")
-            model.qty=jsonobject.getString("qty")
+            model.qty=jsonobject.getString("total_qty")
             model.price=jsonobject.getString("price")
             model.remaining=jsonobject.getString("remaining_qty")
             arraylist.add(model)
@@ -434,12 +431,10 @@ fun Api_getQty(product_id: String, ctx: Context, name: String, url: String, exec
             EndPoints.URL_GETSIZE,
             Response.Listener { response ->
 
-
                 Log.e("tgfggdfg",""+response)
                 val jsonarray = JSONArray(response)
                 loader.cancel()
                 var model: ProductModel
-
 
                 showdialog(ctx, "" + jsonarray, name, url, product_id)
 

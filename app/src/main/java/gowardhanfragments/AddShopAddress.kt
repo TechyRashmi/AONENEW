@@ -62,11 +62,9 @@ class AddShopAddress : Fragment() {
         //loader
         loader = CustomLoader(activity!!, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
 
-
         fm = activity!!.supportFragmentManager
 
         //back press
-
         if(C.page.equals("3"))
         {
             backpressToFragment(MyCustomers(), view, fm)
@@ -87,22 +85,15 @@ class AddShopAddress : Fragment() {
             {
                 view.etPhone.setError("Enter 10 digit Phone number")
             }
-            else if(!view.etEmail.text.isEmpty())
+            else if(view.etEmail.text.isEmpty())
             {
-                if(!view.etEmail.text.toString().trim().matches(emailPattern.toRegex()))
-                {
-                    etEmail.requestFocus()
-                    etEmail.setError("Enter valid email")
-                }
-                else
-                {
-                    //call api
-                    if (activity!!.isConnectedToNetwork()) {
-                        Api_AddShop("" + latitude, "" + longitude, view.etName.text.toString(), view.etPhone.text.toString(), view.etEmail.text.toString(), view.etAdd1.text.toString(), view.etAdd2.text.toString(), view.etCity.text.toString(), view.etState.text.toString(), view.etPin.text.toString(), "" + AppController.prefHelper.get(C.userid))
-                    } else {
-                        Toast.makeText(activity, "No network connection", Toast.LENGTH_SHORT).show()
-                    }
-                }
+                view.etEmail.setError("valid email")
+
+            }
+            else  if(!view.etEmail.text.toString().trim().matches(emailPattern.toRegex()))
+            {
+                etEmail.requestFocus()
+                etEmail.setError("Enter valid email")
             }
             else
             {

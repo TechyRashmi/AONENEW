@@ -20,6 +20,10 @@ class ProductModel() :Parcelable {
     var pending_amt: String? = null
     var used_qty: String? = null
     var remaining_qty: String? = null
+    var alloted_box: String? = null
+    var piece_per_box: String? = null
+    var left_box: String? = null
+    var total_qty: String? = null
 
 
 

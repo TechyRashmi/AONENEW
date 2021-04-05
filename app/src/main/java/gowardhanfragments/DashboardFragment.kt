@@ -185,7 +185,6 @@ class DashboardFragment : Fragment() {
                     Log.e("ResponseProducts", "" + obj)
                     if (obj.getString("Success").equals("true")) {
 
-
                         var jsonarray: JSONArray = obj.getJSONArray("Product")
 
                         for (i in 0 until jsonarray.length()) {

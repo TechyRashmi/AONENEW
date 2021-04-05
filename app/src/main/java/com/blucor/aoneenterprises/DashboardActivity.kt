@@ -45,7 +45,6 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener,
 
         //Load dashboard fragment
         if (savedInstanceState == null) {
-
             if(AppController.prefHelper.get(C.role)=="g_admin")
             {
                 replaceFragment(AdminDashboard())
@@ -55,7 +54,6 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener,
                 replaceFragment(DashboardFragment())
             }
         }
-
     }
 
     fun setUI()
@@ -72,19 +70,17 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener,
         navigationView.setNavigationItemSelectedListener(this)
 
 
-
-
         val menu = navigationView.menu
          navigationView.getHeaderView(0).tvName.text=AppController.prefHelper.get(C.name)
         navigationView.getHeaderView(0).etMobile.text=AppController.prefHelper.get(C.mobileno)
         val url= EndPoints.IMAGE_PATH+AppController.prefHelper.get(C.profile)
+
         Glide.with(this)  //2
                 .load(url) //3
                 .centerCrop() //4
                 .placeholder(R.drawable.userr) //5
                 .error(R.drawable.userr) //6
                 .into(navigationView.getHeaderView(0).ivImage)
-
 
     }
 
@@ -120,9 +116,9 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener,
 
         if (v != null) {
             when (v.id) {
+
                 R.id.iv_menu -> drawer.openDrawer(Gravity.LEFT)
                 R.id.ivCart -> replaceFragment(CartFragment())
-
 
 
                 else -> { // Note the block
@@ -149,7 +145,7 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener,
         }
         else if(id==R.id.alloted)
         {
-            replaceFragment(AllotedFragment())
+            replaceFragment(MyAllotedFragment())
         }
         else if(id==R.id.home)
         {

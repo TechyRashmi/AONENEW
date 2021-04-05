@@ -24,4 +24,5 @@ object EndPoints {
     val URL_GETPDF = URL_ROOT + "send_pdf.php"
     val URL_GETEXECUTIVE = URL_ROOT + "get_executive.php"
     val URL_GETLOCATION = URL_ROOT + "get_location.php"
+    val URL_GETLOCATIONAll = URL_ROOT + "getLocationofAll.php"
 }

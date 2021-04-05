@@ -48,6 +48,8 @@ class ScheduledOrder : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,9 +60,16 @@ class ScheduledOrder : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        // Inflate the layout for this fragment
          val view=inflater.inflate(R.layout.fragment_scheduled_order, container, false)
+
         //loader
+
+
+
         loader = CustomLoader(activity!!, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
+
 
         view.recycleScheduleOrder.layoutManager= GridLayoutManager(activity, 1)
 
@@ -68,7 +77,7 @@ class ScheduledOrder : Fragment() {
         array = ArrayList()
 
         //SetHeadertext
-        DashboardActivity.tvHeaderText.text="Scheduled order"
+        DashboardActivity.tvHeaderText.text="Credit order"
 
         if (activity!!.isConnectedToNetwork()) {
             loader.show()
@@ -79,7 +88,7 @@ class ScheduledOrder : Fragment() {
             Toast.makeText(activity, "No Network Available", Toast.LENGTH_SHORT).show()
         }
 
-        // Inflate the layout for this fragment
+
         return view
     }
 

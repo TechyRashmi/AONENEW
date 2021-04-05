@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="admin.AdminDashboard">
+    <TextView
+     android:id="@+id/tvMAp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="View on Map  > > >"
+        android:background="@color/red_600"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"/>
     <LinearLayout
         android:weightSum="2"
         android:layout_marginLeft="@dimen/_10sdp"
@@ -113,5 +122,7 @@
        android:src="@drawable/map"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"/>
+
+
 
 </LinearLayout>

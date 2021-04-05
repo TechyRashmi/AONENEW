@@ -22,6 +22,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.Debug.getLocation
 import androidx.fragment.app.Fragment
 
 import com.android.volley.AuthFailureError
@@ -40,10 +41,12 @@ import kotlinx.android.synthetic.main.app_bar_main1.view.*
 import kotlinx.android.synthetic.main.fragment_admin_dashboard.*
 import kotlinx.android.synthetic.main.fragment_admin_dashboard.view.*
 import network.EndPoints
+import org.jetbrains.anko.toast
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,7 +54,9 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-lateinit var loader: CustomLoader
+ lateinit var loader: CustomLoader
+
+ var status=0
 
 
 class AdminDashboard : Fragment() {
@@ -72,11 +77,13 @@ class AdminDashboard : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        getLocation()
     }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+            savedInstanceState: Bundle?,
     ): View? {
 
         vw = inflater?.inflate(R.layout.fragment_admin_dashboard, container, false)
@@ -85,17 +92,39 @@ class AdminDashboard : Fragment() {
 
         array= ArrayList()
 
+        //loader
+        loader = CustomLoader(activity!!, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
+
         //SetHeadertext
         DashboardActivity.tvHeaderText.text="  Admin Dashboard"
         DashboardActivity.ivCart.visibility=View.VISIBLE
         DashboardActivity.iv_menu.visibility=View.GONE
 
+        if (activity!!.isConnectedToNetwork()) {
+            API_LocationAll(activity!!)
+        } else {
+            Toast.makeText(activity, "No network connection", Toast.LENGTH_SHORT).show()
+        }
+
         DashboardActivity.ivCart.setOnClickListener{
             showLogoutDialog()
         }
+        vw.tvMAp.setOnClickListener{
 
-        //loader
-        loader = CustomLoader(activity!!, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
+
+            if(status==1)
+            {
+
+                val intent =
+                        Intent(activity, MapsActivity::class.java)
+                activity!!.startActivity(intent)
+            }
+            else
+            {
+                activity!!.toast("No Data found")
+            }
+        }
+
 
         val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
         val currentDateAndTime: String = simpleDateFormat.format(Date())
@@ -143,7 +172,7 @@ class AdminDashboard : Fragment() {
             dialog.cancel()
 
             Toast.makeText(activity, "Successfully logged out..!!", Toast.LENGTH_SHORT).show()
-            AppController.prefHelper.set(C.userid, " ")
+            AppController.prefHelper.set(C.userid, "")
 
             val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
@@ -174,7 +203,7 @@ class AdminDashboard : Fragment() {
 
          fun getCustomView(
                  position: Int, convertView: View?,
-                 parent: ViewGroup
+                 parent: ViewGroup,
          ): View {
             // It is used to set our custom view.
             var convertView: View? = convertView
@@ -269,11 +298,31 @@ class AdminDashboard : Fragment() {
                             }
 
 
-                            addresses = geocoder.getFromLocation(
-                                    latitude,
-                                    longitude,
-                                    1
-                            )
+                          if(latitude!=0.0 ||longitude!=0.0)
+                           {
+                               addresses = geocoder.getFromLocation(
+                                       latitude,
+                                       longitude,
+                                       1
+                               )
+
+
+
+                               val full_address = addresses[0].locality + " " + addresses[0].subLocality + " " + addresses[0].adminArea + " " + addresses[0].postalCode + " " + addresses[0].countryName
+                               val layoutInflater =
+                                       activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                               val addView: View = layoutInflater.inflate(R.layout.admin_items, null)
+                               addView.tvNo.text = " " + count + ". ";
+                               addView.tvAddress.text = full_address
+                               addView.tvTime.text = "At " + jsonobject.getString("order_date")
+                                       .split(" ")[1] + jsonobject.getString(
+                                       "order_date"
+                               ).split(" ")[2]
+
+
+                               vw.llMain.addView(addView)
+                           }
+
 
 
                             // Here 1 represent max location result to returned, by documents it recommended 1 to 5
@@ -283,19 +332,7 @@ class AdminDashboard : Fragment() {
 //                            addresses[0].getAddressLine(addresses[0].MaxAddressLineIndex - 1) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 
 
-                            val full_address = addresses[0].locality + " " + addresses[0].subLocality + " " + addresses[0].adminArea + " " + addresses[0].postalCode + " " + addresses[0].countryName
-                            val layoutInflater =
-                                    activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                            val addView: View = layoutInflater.inflate(R.layout.admin_items, null)
-                            addView.tvNo.text = " " + count + ". ";
-                            addView.tvAddress.text = full_address
-                            addView.tvTime.text = "At " + jsonobject.getString("order_date")
-                                    .split(" ")[1] + jsonobject.getString(
-                                    "order_date"
-                            ).split(" ")[2]
 
-
-                            vw.llMain.addView(addView)
 
                         }
 
@@ -376,9 +413,73 @@ class AdminDashboard : Fragment() {
         mRequestQueue!!.add(mStringRequest!!)
     }
 
+    //Api integration
+    fun API_LocationAll(ctx: Context) {
+        loader.show()
+        //RequestQueue initialized
+        var mRequestQueue = Volley.newRequestQueue(ctx)
+
+        //String Request initialized
+        var mStringRequest = object : StringRequest(
+                Request.Method.POST,
+                EndPoints.URL_GETLOCATIONAll,
+                Response.Listener { response ->
+                    loader.cancel()
+                    vw.llMain.removeAllViews()
+                    val obj = JSONObject(response)
+                    Log.e("response11S", "" + obj)
+                    if (obj.getString("Success").equals("true")) {
+                        // Toast.makeText(activity, "Successfully added to cart", Toast.LENGTH_SHORT).show()
+
+
+                        var jarray: JSONArray = obj.getJSONArray("location")
+
+
+
+                        for (i in 0 until jarray.length()) {
+
+                            var jsonobject: JSONObject = jarray.getJSONObject(i)
+                            var model=LocationModel()
+                            if(!jsonobject.getString("latitude").equals("0"))
+                            {
+                                model.latitude=jsonobject.getString("latitude")
+                                model.longitude=jsonobject.getString("longitude")
+                                model.name=jsonobject.getString("name")
+                                markersArray.add(model)
+                            }
+
+
+                            status=1
+
+                        }
+
+
+
+
+                    } else {
+                        map.visibility = View.VISIBLE
+                        val aniSlide: Animation = AnimationUtils.loadAnimation(activity, R.anim.fade_in)
+                        map.startAnimation(aniSlide)
+
+                        Toast.makeText(ctx, "No record found", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                Response.ErrorListener { error ->
+                    if (loader.isShowing) {
+                        loader.cancel()
+                    }
+                    Log.i("This is the error", "Error :" + error.toString())
+                })
+        {}
+        mRequestQueue!!.add(mStringRequest!!)
+    }
+
 
 
     companion object {
+
+
+        var markersArray= ArrayList<LocationModel>()
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
                 AdminDashboard().apply {

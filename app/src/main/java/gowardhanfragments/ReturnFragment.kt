@@ -108,13 +108,15 @@ class ReturnFragment : Fragment() {
                 {
                     for (item in qtyArrayList.indices) {
                         map= HashMap()
+
                         // body of loop
+
                         map.put("return_qty", qtyArrayList[item].text.toString())
                         map.put("size_id", array.get(item).size_id.toString())
                         arrayList.add(map)
                     }
-                    val array = JSONArray(arrayList)
 
+                    val array = JSONArray(arrayList)
                     if (activity!!.isConnectedToNetwork()) {
 
                         API_RETURN(""+array,view.etRemark.text.toString(),activity!!)

@@ -553,7 +553,7 @@
             android:layout_weight=".8"
             android:background="@color/red_800"
             android:gravity="center"
-            android:text="Schedule Delivery"
+            android:text="Credit Orders"
             android:textColor="@color/white"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"

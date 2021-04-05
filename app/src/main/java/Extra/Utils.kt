@@ -27,7 +27,6 @@ class Utils {
            
           fun backpressToFragment(fragment: Fragment, view: View, fm: FragmentManager)
           {
-              //Back
 
               //Back
               view.setFocusableInTouchMode(true)

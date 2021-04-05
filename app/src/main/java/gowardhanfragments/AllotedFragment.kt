@@ -137,6 +137,9 @@ class AllotedFragment : Fragment() {
                             model.used_qty=jsonobject.getString("used_qty")
                             model.remaining_qty=jsonobject.getString("remaining_qty")
                             array.add(model)
+
+
+
                         }
 
                         val obj_adapter = ProductAdapter(array,activity!!)

@@ -7,11 +7,13 @@ import Extra.Utils.Companion.isConnectedToNetwork
 import Helpers.C
 import ModelClass.ProductModel
 import android.Manifest
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.opengl.Visibility
 import android.os.Build
@@ -29,6 +31,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -63,7 +66,7 @@ private const val ARG_PARAM2 = "param2"
 lateinit var loader:CustomLoader
 
 
-var payment_mode=""
+var payment_mode="COD"
 var order_total=""
 var advanced_amt=""
 var remaining_amt=""
@@ -94,6 +97,41 @@ class CheckoutFragment : Fragment() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
 
+
+        if (!checkGPSEnabled()) {
+            return
+        }
+        if (!checkPermissions()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions()
+            }
+        }
+        else {
+            getLastLocation()
+        }
+
+    }
+    private fun isLocationEnabled(): Boolean {
+        var locationManager = activity!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private fun checkGPSEnabled(): Boolean {
+        if (!isLocationEnabled())
+            showAlert()
+        return isLocationEnabled()
+    }
+
+    private fun showAlert() {
+        val dialog = AlertDialog.Builder(activity)
+        dialog.setTitle("Enable Location")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
+                .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
+                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(myIntent)
+                }
+                .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> }
+        dialog.show()
     }
 
     public override fun onStart() {
@@ -136,11 +174,14 @@ class CheckoutFragment : Fragment() {
                 activity!!,
                 Manifest.permission.ACCESS_COARSE_LOCATION
         )
+
+
         if (shouldProvideRationale) {
             Log.i(TAG, "Displaying permission rationale to provide additional context.")
+            startLocationPermissionRequest()
             showSnackbar("Location permission is needed for core functionality", "Okay",
                     View.OnClickListener {
-                        startLocationPermissionRequest()
+                       // startLocationPermissionRequest()
                     })
         }
         else {
@@ -162,6 +203,7 @@ class CheckoutFragment : Fragment() {
                 }
                 grantResults[0] == PackageManager.PERMISSION_GRANTED -> {
                     // Permission granted.
+                    Log.e("testtttt","hhhhhh")
                     getLastLocation()
                 }
                 else -> {
@@ -186,16 +228,8 @@ class CheckoutFragment : Fragment() {
     private fun getLastLocation() {
         if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }
-        if (ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
+
+
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -391,6 +425,8 @@ class CheckoutFragment : Fragment() {
             {
                 if (activity!!.isConnectedToNetwork()) {
                     loader.show()
+
+
                     API_ORDER(""+latitude, ""+longitude,"" + AppController.prefHelper.get(C.userid), "COD", order_total, "pending", advanced_amt, remaining_amt, activity!!)
                 } else {
                     Toast.makeText(activity, "No Network Available", Toast.LENGTH_SHORT).show()
@@ -547,7 +583,7 @@ class CheckoutFragment : Fragment() {
                             loader.cancel()
                         }
                         array.clear()
-                        vw.tvFinalprice.text = ""
+
 
                         val obj = JSONObject(response)
                         Log.e("responseCART", "" + obj)
@@ -618,6 +654,9 @@ class CheckoutFragment : Fragment() {
         }
         fun API_ORDER(latitude:String,longitude:String,user_id: String, payment_method: String, order_total: String, order_status: String, advanced_payment: String, remaining_payment: String, ctx: Context) {
 
+
+            Log.e("laaa",latitude)
+            Log.e("lng",longitude)
             //RequestQueue initialized
             var mRequestQueue = Volley.newRequestQueue(ctx)
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/white"
     android:orientation="vertical"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -21,7 +21,6 @@
             android:layout_margin="@dimen/_5sdp"
             android:layout_weight="9.5"
             android:orientation="vertical">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:paddingTop="@dimen/_5sdp"
                 android:layoutAnimation="@anim/layout_animation_fall_down"

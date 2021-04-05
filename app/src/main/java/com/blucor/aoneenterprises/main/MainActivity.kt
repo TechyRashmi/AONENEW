@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
             return
         }
         locationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener)
+
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -81,7 +83,6 @@ class MainActivity : AppCompatActivity() {
                 Log.e("testttttt",""+location.latitude)
 
                 myFun(ctx)
-
 
                 // thetext.text = ("" + location.longitude + ":" + location.latitude)
             }

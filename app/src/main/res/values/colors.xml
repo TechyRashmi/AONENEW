@@ -8,4 +8,5 @@
     <color name="myblack">#414a4c</color>
     <color name="black_trans">#99000000</color>
     <color name="grey_light">#E0E0E0</color>
+    <color name="appcolor">#19284C</color>
 </resources>

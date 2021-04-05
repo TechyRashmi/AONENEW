@@ -5,6 +5,7 @@
 
     <string name="subscribe_to_weather">Subscribe To Weather</string>
     <string name="log_token">Log Token</string>
+    <string name="google_maps_key">AIzaSyAEkKeW57simDPRL-OYnkiuTvq8QC7U-gA</string>
 
     <string name="msg_subscribed">Subscribed to weather topic</string>
     <string name="msg_token_fmt" translatable="false">FCM registration Token: %s</string>

@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
 
         Log.e("testt",""+AppController.prefHelper.get(C.userid))
         Handler().postDelayed({
-            if (AppController.prefHelper.get(C.userid).equals(" ")) {
+            if (AppController.prefHelper.get(C.userid).equals("")) {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()

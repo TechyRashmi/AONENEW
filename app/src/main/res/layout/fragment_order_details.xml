@@ -276,6 +276,7 @@
 
 
             <ImageView
+
                 android:id="@+id/ivShare"
                 android:padding="@dimen/_10sdp"
                 android:src="@drawable/whatsappshare"

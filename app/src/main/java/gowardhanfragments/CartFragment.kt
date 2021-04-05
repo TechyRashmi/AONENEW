@@ -52,31 +52,30 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-lateinit var vw :View
+lateinit var vww :View
 
 class CartFragment : Fragment() {
-
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
 
-         vw = inflater?.inflate(R.layout.fragment_cart, container, false)
+         vww = inflater?.inflate(R.layout.fragment_cart, container, false)
         //initialise
         array= ArrayList()
         //SetHeadertext
         DashboardActivity.tvHeaderText.text="List"
         fm = activity!!.supportFragmentManager
-        backpressToFragment(DashboardFragment(), vw, fm)
-        vw.recycleCart.layoutManager= GridLayoutManager(activity, 1)
-         vw.tvProceed.setOnClickListener{
+        backpressToFragment(DashboardFragment(), vww, fm)
+        vww.recycleCart.layoutManager= GridLayoutManager(activity, 1)
+         vww.tvProceed.setOnClickListener{
              replaceFragment(CustomerDetails(), fm)
          }
 
         //loader
-
         loader = CustomLoader(activity!!, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen)
         //call cart api
+
 
         if (activity!!.isConnectedToNetwork()) {
             loader.show()
@@ -86,7 +85,7 @@ class CartFragment : Fragment() {
         }
 
         // Inflate the layout for this fragment
-        return vw
+        return vww
     }
 
     companion object {
@@ -133,7 +132,6 @@ class CartFragment : Fragment() {
         lateinit var array: ArrayList<ProductModel>
 
         lateinit var fm: FragmentManager
-
 
         fun replaceFragment(fragment: Fragment, fm: FragmentManager) {
             val transaction = fm.beginTransaction()
@@ -254,14 +252,14 @@ class CartFragment : Fragment() {
                             loader.cancel()
                         }
                         array.clear()
-                        vw.tvFinalprice.text=""
+                        vww.tvFinalprice.text=""
 
                         val obj = JSONObject(response)
                         Log.e("responseCART", "" + obj)
                         if (obj.getString("Success").equals("true")) {
                             // Toast.makeText(activity, "Successfully added to cart", Toast.LENGTH_SHORT).show()
                             var model: ProductModel
-                            vw.llProceed.visibility=View.VISIBLE
+                            vww.llProceed.visibility=View.VISIBLE
                             var jsonarray: JSONArray = obj.getJSONArray("Product")
 
                             var final_amt:Double=0.0
@@ -288,11 +286,11 @@ class CartFragment : Fragment() {
 
 
                             val obj_adapter = ProductAdapter(array, ctx!!)
-                            vw.recycleCart.setAdapter(obj_adapter)
-                            vw.tvFinalprice.text="\u20b9 "+final_amt
+                            vww.recycleCart.setAdapter(obj_adapter)
+                            vww.tvFinalprice.text="\u20b9 "+final_amt
 
                         } else {
-                            vw.llProceed.visibility=View.GONE
+                            vww.llProceed.visibility=View.GONE
                             Toast.makeText(ctx, "Nothing in basket", Toast.LENGTH_SHORT).show()
                         }
                     },

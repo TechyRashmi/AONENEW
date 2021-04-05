@@ -53,7 +53,6 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, KodeinAware {
 
 
 
-
     private val factory: AuthVMF by instance<AuthVMF>()
 
     private lateinit var viewModel: AuthVM
